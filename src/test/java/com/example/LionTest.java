@@ -21,7 +21,7 @@ class LionTest {
 
     @Test
     void shouldReturnKittens() throws Exception {
-        Lion lion = new Lion("Самец");
+        Lion lion = new Lion("Самец", feline);
 
         lion.feline = feline;
         when(feline.getKittens()).thenReturn(KITTENS);
@@ -33,29 +33,28 @@ class LionTest {
 
     @Test
     void shouldHaveManeWhenMale() throws Exception {
-        Lion lion = new Lion("Самец");
+        Lion lion = new Lion("Самец", feline);
 
         assertTrue(lion.doesHaveMane());
     }
 
     @Test
     void shouldNotHaveManeWhenFemale() throws Exception {
-        Lion lion = new Lion("Самка");
+        Lion lion = new Lion("Самка", feline);
 
         assertFalse(lion.doesHaveMane());
     }
 
     @Test
     void shouldThrowExceptionWhenInvalidSex() {
-        assertThrows(Exception.class, () -> new Lion("invalid"));
+        assertThrows(Exception.class, () -> new Lion("invalid", feline));
     }
 
     @Test
     void shouldReturnFood() throws Exception {
-        Lion lion = new Lion("Самец");
+        Lion lion = new Lion("Самец", feline);
         List<String> food = List.of(FOOD);
 
-        lion.feline = feline;
         when(feline.getFood("Хищник")).thenReturn(food);
 
         List<String> actual = lion.getFood();
